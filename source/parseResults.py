@@ -47,15 +47,16 @@ elif outputFileLen:
     info += 'Removed text is marked with ###########.\n'
 
     # Take the first half of the output
+    linesTaken = 0
     for line in outputLines:
         if not addLine(line, outputSizeLimit/2):
             break
+        linesTaken += 1
 
-    middleMark = '######### The removed output was here.\n'
-    info += middleMark
+    middleMark = '######### The removed output (%s lines) was here.\n'
 
     # compute where the second half starts
-    accumulated = len(middleMark)
+    accumulated = len(middleMark) + 20  # add a bit more for # of lines (see below)
     totalLines = len(outputLines)
     secondHalfStart = totalLines - 1
     for lineNum in reversed(range(0, totalLines)):
@@ -63,10 +64,14 @@ elif outputFileLen:
             break
         accumulated += len(outputLines[lineNum])
         secondHalfStart = lineNum
+        linesTaken += 1
+
+    info += middleMark % (totalLines - linesTaken)
 
     # put the second half in
     for lineNum in range(secondHalfStart, totalLines):
         info += outputLines[lineNum]
+        linesTaken += 1
 
 results['output'] = info
 assert len(info) <= outputSizeLimit
