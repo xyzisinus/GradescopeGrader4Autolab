@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Set up autograder files
+
+echo OUTPUT
+
+cp /autograder/submission/calculator.py /autograder/source/calculator.py
+
+cd /autograder/source
+
+python run_tests.py > /autograder/results/results.json

@@ -1,0 +1,78 @@
+{
+    "execution_time": "0.03", 
+    "tests": [
+        {
+            "output": "Test Failed: 32 != 4\n", 
+            "score": 0.0, 
+            "max_score": 2, 
+            "name": "Test evaluating 8 / 4 * 2"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Test evaluating -2 + 6"
+        }, 
+        {
+            "output": "Test Failed: invalid literal for int() with base 10: '(1'\n", 
+            "score": 0.0, 
+            "max_score": 2, 
+            "name": "Test evaluating (1 + 1) * 4"
+        }, 
+        {
+            "output": "Test Failed: 2 != 9\n", 
+            "score": 0.0, 
+            "max_score": 2, 
+            "name": "Test evaluating 1 + 1 * 8"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Test evaluating 2 ** 8 (should raise an exception)"
+        }, 
+        {
+            "score": 1, 
+            "max_score": 1, 
+            "name": "Test evaluating 1 + 1"
+        }, 
+        {
+            "output": "Test Failed: 32 != 2\n", 
+            "score": 0.0, 
+            "max_score": 1, 
+            "name": "Test evaluating 8/4"
+        }, 
+        {
+            "score": 1, 
+            "max_score": 1, 
+            "name": "Test evaluating 4 * 8"
+        }, 
+        {
+            "score": 1, 
+            "max_score": 1, 
+            "name": "Test evaluating 2 - 1"
+        }, 
+        {
+            "output": "Test Failed: invalid literal for int() with base 10: '1+1'\n", 
+            "score": 0.0, 
+            "max_score": 2, 
+            "name": "Test evaluating 1+1 (no whitespace)"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Test quitting the REPL", 
+            "tags": [
+                "integration"
+            ]
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Tests evaluating 1 + 1 in the REPL", 
+            "tags": [
+                "integration"
+            ]
+        }
+    ], 
+    "score": 11.0, 
+    "leaderboard": []
+}
