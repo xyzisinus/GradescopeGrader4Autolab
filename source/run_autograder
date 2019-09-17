@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Set up autograder files
+
+mkdir /var/run/grader
+cp source/Autolab_grader/* /var/run/grader
+cp submission/* /var/run/grader
+
+cd /autograder/source
+# python3 grader.py
+python3 parseResults.py
+cp /var/run/grader/results.json /autograder/results
