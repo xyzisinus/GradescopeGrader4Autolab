@@ -2,7 +2,13 @@
 
 # Set up autograder files
 
-mkdir /var/run/grader
+# When running in a container built with
+# https://github.com/xyzisinus/GradescopeGrader4Autolab
+# /var/run/grader (mounted to a diretory outside)
+# maybe exist and not clean. Hence the -p flag and rm.
+mkdir -p /var/run/grader
+rm -f /var/run/grader/*
+
 cp source/Autolab_grader/* /var/run/grader
 cp submission/* /var/run/grader
 

@@ -1,0 +1,9 @@
+version: "2"
+services:
+  gradescope-grader:
+    build: .
+    volumes:
+      # mount the data directory /var/run/grader to have
+      # a peek into the container's activities
+      # <dir_outside_container>:<dir_seen_inside_container>
+      - /var/run/GradescopeGrader:/var/run/grader
