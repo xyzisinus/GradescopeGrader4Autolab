@@ -50,7 +50,7 @@ cp <student submission file> submission
 docker-compose build
 docker-compose up
 ```
-While the container is running, its progress can be monitored by watching the files, `grader.log`, `output`, and `results.json` under `/var/run/GradescopeGrader` on the host machine without having to dive into the container.
+The container's progress can be monitored by watching the files, `grader.log`, `output`, and `results.json` under `/var/run/GradescopeGrader` on the host machine without having to dive into the container.
 
 ### Screenshots of grading results
 
