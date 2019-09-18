@@ -50,8 +50,18 @@ cp <student submission file> submission
 docker-compose build
 docker-compose up
 ```
-While the container is running, its progress can be monitored by watching the files, `grader.log`, `output`, and `results.json` under `/var/run/GradescopeGrader` on the host machine without diving into the container.
+While the container is running, its progress can be monitored by watching the files, `grader.log`, `output`, and `results.json` under `/var/run/GradescopeGrader` on the host machine without having to dive into the container.
 
 ### Screenshots of grading results
 
+##### Top of the page
+
 ![Top of the page](https://github.com/xyzisinus/GradescopeGrader4Autolab/blob/master/screenshots/topOfResultsPage.png)
+
+##### Middle of the page
+
+![Middle of the page](https://github.com/xyzisinus/GradescopeGrader4Autolab/blob/master/screenshots/middleOfResultsPage.png)
+
+##### Bottom of the page
+
+![Bottom of the page](https://github.com/xyzisinus/GradescopeGrader4Autolab/blob/master/screenshots/bottomOfResultsPage.png)
