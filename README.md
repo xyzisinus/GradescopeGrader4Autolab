@@ -1,15 +1,56 @@
+### Build the Gradescope grader
+
 This is a grader for [Gradescope Autograder](https://gradescope-autograders.readthedocs.io/en/latest/). 
 However, it is not for grading a specific assignment but
 for running any made-for-Autolab grader.
 Here is a [very brief introduction](https://github.com/xyzisinus/grader4AutolabProjectNeedingVM/blob/master/README.md) to Autolab.
 
-This grader is particularly designed to work with grader.py in 
+This grader is particularly designed to work with `grader.py` in 
 the [grader4AutolabProjectNeedingVM](https://github.com/xyzisinus/grader4AutolabProjectNeedingVM) repository.
-grader.py runs any Autolab grader on a VM in the AWS cloud.  Please read 
+`grader.py` runs any Autolab grader on a VM in the AWS cloud.  Please read 
 the [README](https://github.com/xyzisinus/grader4AutolabProjectNeedingVM/blob/master/README.md) to understand how it works.
 
-To use grader.py, do the following standing at the top directory of this repository.
+In this repository, the files for building the Gradescope grader are under the `source` directory:
 ```
-cp <grader4AutolabProjectNeedingVM>/grader.py source
-cp <grader4AutolabProjectNeedingVM>/config_defaults.yaml source
+source/grader.py  # copied from a grader4AutolabProjectNeedingVM repository
+source/config_defaults.yaml  # copied from a grader4AutolabProjectNeedingVM repository
+source/setup.sh
+source/run_autograder
+source/parseResults.py  # parse Autolab's output into Gradescope's results.json
+
+source/Autolab_grader/autograde.tar  # Autolab grader for the specific assignment
+source/Autolab_grader/Makefile  # Autolab grader's top Makefile
+source/Autolab_grader/config.yaml  # explained in grader4AutolabProjectNeedingVM's README
+source/Autolab_grader/aws-ssh-key.pem  # ssh key file for Autolab compatible grading VM
 ```
+The files directly under `source` form a Gradescope grader. 
+The files under `source/Autolab_grader` are specific for a Autolab project grader.
+Together they are packed into a `autograder.zip` file and uploaded to Gradescope:
+```
+cd source
+zip -r <upload dir>/autograder.zip *
+```
+In Gradescope's grading container, the `run_autograder` script executes `grader.py` which creates an AWS VM, runs the
+Autolab grader on the VM and copies the output file from the VM.  `run_autograder` then executes parseResults.py to
+convert the scores in the output file to the format of `results.json`.  
+It also puts the content of the output file (maybe trimmed to fit 
+Gradescope's output sise limit) as the `output` property of
+results.json. A couple of screenshots of Gradescope's results page can be found at the end of this README.
+
+##### Debug the grader
+
+Suppose you are course staff porting your made-for-Autolab grader to Gradescope using this grader.
+To test you grader, you can upload autograder.zip and test it using Gradescope's `Debug via SSH` feature.
+For quick testing cycles you can also use this repository to build the Docker container that mimicks Gradescope's container:
+```
+mkdir /var/run/GradescopeGrader  # mounted inside the container as its data directory
+cd <top of this repository>
+mkdir submission
+cp <student submission file> submission
+docker-compose build
+docker-compose up
+```
+When the container is running, its progress can be monitored by watching the files, `grader.log`, `output`, `results.json` under /var/run/GradescopeGrader on the host machine.
+
+##### Screenshots of grading results
+
