@@ -53,7 +53,7 @@ elif outputFileLen:
             break
         linesTaken += 1
 
-    middleMark = '######### The removed output (%s lines) was here.\n'
+    middleMark = '######### The removed output (%s lines removed) was here.\n'
 
     # compute where the second half starts
     accumulated = len(middleMark) + 20  # add a bit more for # of lines (see below)
