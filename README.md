@@ -53,7 +53,7 @@ docker-compose up
 The container's progress can be monitored by watching the files, `grader.log`, `output`, and `results.json` under `/var/run/GradescopeGrader` on the host machine without having to dive into the container.
 
 To help understand the file hierarchy in Gradescope's grading container, the files under /autograder in the container are kept
-in this repository under `autograder`.  It reflects the post execution state of `run_autograder` for Demo Programming Assignment , Gradescope demo course 202.
+in this repository under `autograder`.  It reflects the post execution state of `run_autograder` for Demo Programming Assignment, Gradescope demo course 202.
 
 ### Screenshots of grading results
 
