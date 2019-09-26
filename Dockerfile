@@ -30,7 +30,7 @@ ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
 # debugging
-CMD /autograder/run_autograder; sleep 10000
+# CMD /autograder/run_autograder; sleep 10000
 
 # normal exec
-# CMD /autograder/run_autograder
+CMD /autograder/run_autograder
