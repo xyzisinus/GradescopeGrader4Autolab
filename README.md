@@ -45,7 +45,7 @@ For quick testing cycles you can also use this repository's docker files to buil
 mkdir /var/run/GradescopeGrader  # mounted inside the container as its data directory
 cd <top of this repository>
 mkdir submission
-cp <student submission file> submission
+cp <student submission file> submission  # or "git clone <student submission repo> submission"
 docker-compose build
 docker-compose up
 ```
