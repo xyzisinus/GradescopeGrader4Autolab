@@ -20,6 +20,9 @@ COPY ./source source
 COPY ./submission submission
 COPY ./source/run_autograder .
 
+# in submission_metadata.json we want to use the submission id
+RUN echo \{\"id\":123456\} > submission_metadata.json
+
 # setup.sh installs stuff needed by grader.py
 # it's used by Gradescope to build its container, too.
 RUN chmod +x source/setup.sh

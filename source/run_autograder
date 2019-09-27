@@ -1,18 +1,50 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
-# Set up autograder files
+import os
+import yaml
+import json
 
 # When running in a container built with
 # https://github.com/xyzisinus/GradescopeGrader4Autolab
 # /var/run/grader (mounted to a diretory outside)
 # maybe exist and not clean. Hence the -p flag and rm.
-mkdir -p /var/run/grader
-rm -f /var/run/grader/*
 
-cp source/Autolab_grader/* /var/run/grader
-cp submission/* /var/run/grader
+os.system('mkdir -p /var/run/grader')
+os.system('rm -rf /var/run/grader/*')
+os.system('cp source/Autolab_grader/* /var/run/grader')
 
-cd /autograder/source
-python3 grader.py
-python3 parseResults.py
-cp /var/run/grader/results.json /autograder/results
+# load the config files to get a couple of attributes
+with open('source/config_defaults.yaml', 'r') as f:
+    defaults = yaml.load(f, Loader=yaml.FullLoader)
+with open('/var/run/grader/config.yaml', 'r') as f:
+    updates = yaml.load(f, Loader=yaml.FullLoader)
+defaults.update(updates)
+submission_id = defaults['SUBMISSION_ID']
+submission_filename = defaults['SUBMISSION_FILENAME']
+submission_tar_top_dirname = defaults['SUBMISSION_TAR_TOP_DIRNAME']
+
+# append SUBMISSION_ID with Gradescope's system wide submission id
+# and put it back to the config file
+with open('submission_metadata.json', 'r') as f:
+    meta = json.load(f)
+    submission_id += '_' + str(meta['id'])
+newProperty = 'SUBMISSION_ID: ' + submission_id
+os.system('echo %s >> /var/run/grader/config.yaml' % newProperty)
+
+submissionFiles = os.listdir('submission')
+if len(submissionFiles) == 1 and submissionFiles[0] == submission_filename:
+    # a single file, ready for Autolab grader
+    os.system('cp submission/* /var/run/grader')
+else:
+    # must be a clone of a git repo, make tar
+    tarCmd = "tar cf /var/run/grader/%s --transform s/submission/%s/ submission --exclude='submission/.git'" %\
+             (submission_filename, submission_tar_top_dirname)
+    os.system(tarCmd)
+
+# grade and parse results
+os.chdir('source')
+os.system('python3 grader.py')
+os.system('python3 parseResults.py')
+os.chdir('..')
+os.system('mkdir -p results')
+os.system('cp /var/run/grader/results.json results')
