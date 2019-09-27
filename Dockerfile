@@ -19,6 +19,8 @@ WORKDIR /autograder
 COPY ./source source
 COPY ./submission submission
 COPY ./source/run_autograder .
+ADD https://raw.githubusercontent.com/xyzisinus/grader4AutolabProjectNeedingVM/master/grader.py source
+ADD https://raw.githubusercontent.com/xyzisinus/grader4AutolabProjectNeedingVM/master/config_defaults.yaml source
 
 # in submission_metadata.json we want to use the submission id
 RUN echo \{\"id\":123456\} > submission_metadata.json
