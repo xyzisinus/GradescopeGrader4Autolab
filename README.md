@@ -1,7 +1,7 @@
 ### Build the Gradescope grader
 
 This is a grader for [Gradescope Autograder](https://gradescope-autograders.readthedocs.io/en/latest/). 
-However, it is not for grading a specific assignment but a bridging grader
+However, it is not for grading a specific assignment but a **bridging grader**
 for running any made-for-Autolab grader.
 Here is a [very brief introduction](https://github.com/xyzisinus/grader4AutolabProjectNeedingVM/blob/master/README.md) to Autolab.
 
