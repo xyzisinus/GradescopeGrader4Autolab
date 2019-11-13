@@ -25,7 +25,7 @@ source/Autolab_grader/aws-ssh-key.pem  # ssh key file for Autolab compatible gra
 ```
 The files directly under `source` form a Gradescope grader. 
 The files under `source/Autolab_grader` are specific for a Autolab project grader.
-Together they are packed into a `autograder.zip` file and uploaded to Gradescope:
+Together they are packaged into a `autograder.zip` file and uploaded to Gradescope:
 ```
 cd source
 zip -r <upload dir>/autograder.zip *
